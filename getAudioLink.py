@@ -8,4 +8,4 @@ if arg:
 	audiostreams = video.audiostreams
 	for a in audiostreams:
 		if a.extension == 'm4a':
-			print(json.dumps({'url':a.url, 'title':video.title, 'author':video.author}))
+                    print(json.dumps({'url':a.url, 'title':video.title, 'author':video.author, 'date':video.published}))

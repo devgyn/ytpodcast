@@ -65,6 +65,7 @@ foreach ($urls as $url)
 	->description($exec->author)
 	->url($url)
 	->enclosure($exec->url)
+	->pubDate(strtotime($exec->date))
 	->appendTo($channel);
 }
 
