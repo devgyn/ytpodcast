@@ -11,6 +11,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-    	"suin/php-rss-writer": "^1.6"
+    	"suin/php-rss-writer": "^1.6",
+	"ext-simplexml": "*"
     }
 }
