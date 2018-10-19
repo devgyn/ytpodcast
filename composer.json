@@ -1,5 +1,16 @@
 {
+    "name": "devgyn/ytpodcast",
+    "description": "Fetch audio of youtube videos and make RSS Feed to listen in podcast app",
+    "type": "project",
+    "license": "GNU General Public License v3.0",
+    "authors": [
+        {
+            "name": "Dev",
+            "email": "devman@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
     "require": {
-        "suin/php-rss-writer": "^1.6"
+    	"suin/php-rss-writer": "^1.6"
     }
 }
