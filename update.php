@@ -6,6 +6,36 @@ if (PHP_SAPI !== 'cli' || isset($_SERVER['HTTP_USER_AGENT'])) {
 
 require_once 'vendor/autoload.php';
 
+// load channels IDs from json file
+$ytChannelIDs = json_decode(file_get_contents('channels.json'));
+
+if (!isset($ytChannelIDs->channels)) {
+	throw new Exception('Invalid channels items');
+}
+
+$urls = null;
+
+foreach ($ytChannelIDs->channels as $ytch)
+{
+	// get videos by youtube feed url
+	$youtubeFeed = file_get_contents('https://www.youtube.com/feeds/videos.xml?channel_id=' . $ytch);
+
+	if (!$youtubeFeed) {
+		throw new Exception('Youtube feed unreachable');
+	}
+
+	$ytXML = new SimpleXMLElement($youtubeFeed);
+
+
+	foreach ($ytXML->entry as $entry)
+	{
+		$ytvID = str_replace('yt:video:', '', $entry->id);
+		$urls[] = 'https://www.youtube.com/watch?v=' . $ytvID;
+	}
+
+}
+
+
 $feed = new \Suin\RSSWriter\Feed();
 
 $channel = new \Suin\RSSWriter\Channel();
@@ -15,13 +45,10 @@ $channel
 	->description('fetch youtube audios')
 	->appendTo($feed);
 
-
-//@TODO get the videos by RSS feed youtube channel
-$urls = [
-	'https://www.youtube.com/watch?v=B5hp1qGW1NE',
-	'https://www.youtube.com/watch?v=gtrK6EyZA20', 
-	'https://www.youtube.com/watch?v=hv6dmtuxZlE'
-];
+if (!$urls) {
+	// if urls is empty, do nothing
+	exit;
+}
 
 foreach ($urls as $url)
 {
