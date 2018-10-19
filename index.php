@@ -20,14 +20,18 @@ $urls = [
 
 foreach ($urls as $url)
 {
-	$exec = json_decode(exec('python /var/www/ytpodcast/getAudioLink.py ' . $url));
+	$exec = json_decode(exec('python getAudioLink.py ' . $url));
+
+	if (!isset($exec-title) || !isset($exec->url)) {
+		continue;
+	}
 
 	$item = new \Suin\RSSWriter\Item();
 
 	$item
 	->title($exec->title)
 	->description($exec->author)
-	->url($urls[0])
+	->url($url)
 	->enclosure($exec->url)
 	->appendTo($channel);
 }
