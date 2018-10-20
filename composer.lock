@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0001944ff2d52d6cee154080a97cebe3",
+    "content-hash": "087fb5fca0610e60a8e327f98712563f",
     "packages": [
         {
             "name": "suin/php-rss-writer",
@@ -62,6 +62,9 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-simplexml": "*",
+        "php": "^7.0"
+    },
     "platform-dev": []
 }
